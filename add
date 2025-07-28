@@ -1,0 +1,112 @@
+import java.util.*;
+
+public class Main {
+    static Scanner scanner = new Scanner(System.in);
+    static List<Customer> customers = new ArrayList<>();
+
+    public static void main(String[] args) {
+        System.out.println("=== Airline Management System ===");
+        login();
+    }
+
+    static void login() {
+        System.out.print("Enter username: ");
+        String user = scanner.nextLine();
+        System.out.print("Enter password: ");
+        String pass = scanner.nextLine();
+
+        // For demo: accept any username/password
+        if (!user.isEmpty() && !pass.isEmpty()) {
+            System.out.println("\nLogin Successful!\n");
+            showDashboard();
+        } else {
+            System.out.println("Invalid credentials. Try again.");
+        }
+    }
+
+    static void showDashboard() {
+        while (true) {
+            System.out.println("\n--- Dashboard ---");
+            System.out.println("1. Add Customer");
+            System.out.println("2. View All Customers");
+            System.out.println("3. Exit");
+            System.out.print("Enter your choice: ");
+            int choice = Integer.parseInt(scanner.nextLine());
+
+            switch (choice) {
+                case 1:
+                    addCustomer();
+                    break;
+                case 2:
+                    viewCustomers();
+                    break;
+                case 3:
+                    System.out.println("Thank you for using the system!");
+                    return;
+                default:
+                    System.out.println("Invalid choice. Try again.");
+            }
+        }
+    }
+
+    static void addCustomer() {
+        System.out.println("\n--- Add Customer ---");
+        System.out.print("Enter name: ");
+        String name = scanner.nextLine();
+
+        System.out.print("Enter gender (Male/Female): ");
+        String gender = scanner.nextLine();
+
+        System.out.print("Enter phone: ");
+        String phone = scanner.nextLine();
+
+        System.out.print("Enter Aadhar: ");
+        String aadhar = scanner.nextLine();
+
+        System.out.print("Enter nationality: ");
+        String nationality = scanner.nextLine();
+
+        System.out.print("Enter address: ");
+        String address = scanner.nextLine();
+
+        Customer c = new Customer(name, gender, phone, aadhar, nationality, address);
+        customers.add(c);
+
+        System.out.println("Customer added successfully!");
+    }
+
+    static void viewCustomers() {
+        if (customers.isEmpty()) {
+            System.out.println("No customers found.");
+            return;
+        }
+
+        System.out.println("\n--- Customer List ---");
+        for (Customer c : customers) {
+            System.out.println(c);
+        }
+    }
+}
+
+// ------------------ Customer Class ------------------
+class Customer {
+    String name, gender, phone, aadhar, nationality, address;
+
+    public Customer(String name, String gender, String phone, String aadhar, String nationality, String address) {
+        this.name = name;
+        this.gender = gender;
+        this.phone = phone;
+        this.aadhar = aadhar;
+        this.nationality = nationality;
+        this.address = address;
+    }
+
+    public String toString() {
+        return "\nName: " + name +
+               "\nGender: " + gender +
+               "\nPhone: " + phone +
+               "\nAadhar: " + aadhar +
+               "\nNationality: " + nationality +
+               "\nAddress: " + address + "\n";
+    }
+}
